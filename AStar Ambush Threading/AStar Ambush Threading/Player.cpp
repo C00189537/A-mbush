@@ -11,7 +11,7 @@ Player::Player(Vector pos, int width, int height, SDL_Color colour, EventListene
 	m_rect.h = height;
 
 	m_colour = colour;
-	m_speed = 50;
+	m_speed = 100;
 
 	m_listener = listener;
 }

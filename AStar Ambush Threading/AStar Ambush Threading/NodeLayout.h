@@ -19,14 +19,13 @@ public:
 
 	std::vector<Node*> getNodes();
 
+	void addArcs();
+
+	void draw(SDL_Renderer* renderer);
+
 private:
 	std::vector<Node*> m_nodes;
 
 	int m_nodesPerLine;
 
-	//Node** m_nodes; // pointer to array of pointers to nodes
-	//
-	//int m_noOfNodes;
-	//
-	//void addArcs(); // adds connections between nodes
 };

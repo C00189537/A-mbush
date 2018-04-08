@@ -119,25 +119,23 @@
   <ItemGroup>
     <ClCompile Include="Arc.cpp" />
     <ClCompile Include="AStar.cpp" />
-    <ClCompile Include="BaseObject.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="NodeLayout.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="Threadpool.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arc.h" />
     <ClInclude Include="AStar.h" />
-    <ClInclude Include="BaseObject.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="EventListener.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Threadpool.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="Node.h" />

@@ -14,7 +14,14 @@ void Node::addArc(Node *n) {
 	Arc arc;
 
 	arc.setNode(n);
-	arc.setWeight(calculateArcWeight(n->getPos()));
+	if (n->getID() == "Floor")
+	{
+		arc.setWeight(1);
+	}
+	else if (n->getID() == "Wall")
+	{
+		arc.setWeight(500000);
+	}
 
 	m_arcs.push_back(arc);
 }
@@ -69,4 +76,12 @@ void Node::setCost(float cost) {
 
 std::list<Arc>& Node::getArcs() {
 	return m_arcs;
+}
+
+void Node::draw(SDL_Renderer *renderer)
+{
+	for (std::list<Arc>::iterator i = m_arcs.begin(); i != m_arcs.end(); i++)
+	{
+		SDL_RenderDrawLine(renderer, m_pos.x, m_pos.y, (*i).getNode()->getPos().x, (*i).getNode()->getPos().y);
+	}
 }

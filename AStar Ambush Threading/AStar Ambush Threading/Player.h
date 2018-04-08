@@ -1,9 +1,9 @@
 #pragma once
 
-#include "BaseObject.h"
+#include "Entity.h"
 #include "EventListener.h"
 
-class Player : public BaseObject {
+class Player : public Entity {
 public:
 
 	Player() {}

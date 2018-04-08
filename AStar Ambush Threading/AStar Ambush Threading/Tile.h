@@ -1,9 +1,9 @@
 #pragma once
 
-#include "BaseObject.h"
+#include "Entity.h"
 #include "Node.h"
 
-class Tile : public BaseObject {
+class Tile : public Entity {
 public:
 	Tile() {}
 	Tile(Vector pos, int width, int height, SDL_Color colour, std::string id);
