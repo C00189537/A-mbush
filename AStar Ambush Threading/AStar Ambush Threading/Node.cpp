@@ -5,7 +5,8 @@
 //	m_id = id;
 //}
 
-Node::Node(Vector pos, std::string id) {
+Node::Node(SDL_Point pos, std::string id) 
+{
 	m_pos = pos;
 	m_id = id;
 }
@@ -26,11 +27,11 @@ void Node::addArc(Node *n) {
 	m_arcs.push_back(arc);
 }
 
-float Node::calculateArcWeight(Vector otherNodePos) {
+float Node::calculateArcWeight(SDL_Point otherNodePos) {
 	return sqrt(((otherNodePos.x - m_pos.x) * (otherNodePos.x - m_pos.x)) + ((otherNodePos.y - m_pos.y) * (otherNodePos.y - m_pos.y)));
 }
 
-Vector Node::getPos() {
+SDL_Point Node::getPos() {
 	return m_pos;
 }
 

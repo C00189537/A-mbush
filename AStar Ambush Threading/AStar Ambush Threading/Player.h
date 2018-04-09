@@ -8,7 +8,7 @@ class Player : public Entity
 public:
 
 	Player() {}
-	Player(SDL_Rect r, SDL_Color colour, Keys *listener);
+	Player(SDL_Point pos, SDL_Rect r, SDL_Color colour, Keys *listener);
 
 	void update(float deltaTime);
 

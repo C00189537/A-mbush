@@ -27,9 +27,9 @@ private:
 
 	void aWholeNewWorld();
 
-	float m_gWidth = 64, m_gHeigth = 36;
-	float m_screenWidth = 1280,m_screenHeight = 720;
-	float m_tileX = 20, m_tileY = 20, m_wallsize = 20;
+	int m_gWidth = 64, m_gHeigth = 36;
+	int m_screenWidth = 1280,m_screenHeight = 720;
+	int m_tileX = 20, m_tileY = 20, m_wallsize = 20;
 
 	std::vector<SDL_Point> nodePos;
 };

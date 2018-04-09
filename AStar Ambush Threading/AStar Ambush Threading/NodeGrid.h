@@ -11,7 +11,7 @@ public:
 	NodeGrid() {}
 	//NodeGrid(std::vector<Vector> &nodeData);
 
-	void addNode(Vector pos, std::string id);
+	void addNode(SDL_Point pos, std::string id);
 	std::vector<Node*> getNodes();
 
 	void addArcs();

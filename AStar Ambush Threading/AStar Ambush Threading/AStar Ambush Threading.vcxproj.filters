@@ -71,9 +71,6 @@
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Vector.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="World.h">
       <Filter>Header Files</Filter>
     </ClInclude>

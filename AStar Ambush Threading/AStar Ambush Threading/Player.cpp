@@ -2,10 +2,9 @@
 
 #include <iostream>
 
-Player::Player(SDL_Rect r, SDL_Color colour, Keys *k) 
+Player::Player(SDL_Point pos, SDL_Rect r, SDL_Color colour, Keys *k) 
 {
-	m_pos.x = (int)r.x;
-	m_pos.y = (int)r.y;
+	m_pos = pos;
 	m_rect = r;
 
 	m_colour = colour;

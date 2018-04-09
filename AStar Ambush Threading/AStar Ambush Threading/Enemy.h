@@ -6,7 +6,7 @@ class Enemy : public Entity
 public:
 
 	Enemy() {}
-	Enemy(Vector pos, int width, int height, SDL_Color colour, int speed);
+	Enemy(SDL_Point pos, SDL_Rect r, SDL_Color colour, int speed);
 
 	void update(float deltaTime);
 

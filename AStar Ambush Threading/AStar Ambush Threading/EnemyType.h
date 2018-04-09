@@ -7,9 +7,9 @@ class EnemyType : public Spawner
 public:
 	EnemyType() {};
 	~EnemyType() {};
-	Enemy* GreenEnemy(Vector pos);
-	Enemy* BlueEnemy(Vector pos);
-	Enemy* RedEnemy(Vector pos);
+	Enemy* GreenEnemy(SDL_Point pos);
+	Enemy* BlueEnemy(SDL_Point pos);
+	Enemy* RedEnemy(SDL_Point pos);
 private:
 
 	Enemy * enemyType;

@@ -9,7 +9,7 @@ void World::create(Keys *k)
 	aWholeNewWorld();
 	m_nodes.setColumnSize(100);
 	m_nodes.addArcs();
-	m_player = Player{ {20, 20, 20, 20}, SDL_Color{ 0, 255, 255, 255 }, k };
+	m_player = Player{ {20, 20}, {20, 20, 20, 20}, SDL_Color{ 0, 255, 255, 255 }, k };
 }
 void World::update(float deltaTime) 
 {
@@ -39,49 +39,49 @@ void World::aWholeNewWorld() {
 		{
 			if (i == 0) 
 			{
-				m_walls.push_back(new Tile(Vector{ i * (m_screenWidth / m_gWidth), j * (m_screenHeight / m_gHeigth) }, m_wallsize, m_wallsize, SDL_Color{ 255, 255, 255, 255 }, "Wall"));
+				m_walls.push_back(new Tile({ i * (m_screenWidth / m_gWidth), j * (m_screenHeight / m_gHeigth) }, m_wallsize, m_wallsize, SDL_Color{ 255, 255, 255, 255 }, "Wall"));
 				nodePos.push_back({ i * (int)(m_screenWidth / m_gWidth) + 10, j * (int)(m_screenHeight / m_gHeigth) + 10 });
 				//Node creation
 				m_nodes.addNode({ i * (m_screenWidth / m_gWidth) + 10, j * (m_screenHeight / m_gHeigth) + 10 }, "Wall");
 			}
 			else if (j == 0)
 			{
-				m_walls.push_back(new Tile(Vector{ i * (m_screenWidth / m_gWidth), j * (m_screenHeight / m_gHeigth) }, m_wallsize, m_wallsize, SDL_Color{ 255, 255, 255, 255 }, "Wall"));
+				m_walls.push_back(new Tile({ i * (m_screenWidth / m_gWidth), j * (m_screenHeight / m_gHeigth) }, m_wallsize, m_wallsize, SDL_Color{ 255, 255, 255, 255 }, "Wall"));
 				nodePos.push_back({ i * (int)(m_screenWidth / m_gWidth) + 10, j * (int)(m_screenHeight / m_gHeigth) + 10 });
 				//Node creation
 				m_nodes.addNode({ i * (m_screenWidth / m_gWidth) + 10, j * (m_screenHeight / m_gHeigth) + 10 }, "Wall");
 			}
 			else if (i == m_gWidth - 1)
 			{
-				m_walls.push_back(new Tile(Vector{ i * (m_screenWidth / m_gWidth), j * (m_screenHeight / m_gHeigth) }, m_wallsize, m_wallsize, SDL_Color{ 255, 255, 255, 255 }, "Wall"));
+				m_walls.push_back(new Tile({ i * (m_screenWidth / m_gWidth), j * (m_screenHeight / m_gHeigth) }, m_wallsize, m_wallsize, SDL_Color{ 255, 255, 255, 255 }, "Wall"));
 				nodePos.push_back({ i * (int)(m_screenWidth / m_gWidth) + 10, j * (int)(m_screenHeight / m_gHeigth) + 10 });
 				//Node creation
 				m_nodes.addNode({ i * (m_screenWidth / m_gWidth) + 10, j * (m_screenHeight / m_gHeigth) + 10 }, "Wall");
 			}
 			else if (j == m_gHeigth - 1) 
 			{
-				m_walls.push_back(new Tile(Vector{ i * (m_screenWidth / m_gWidth), j * (m_screenHeight / m_gHeigth) }, m_wallsize, m_wallsize, SDL_Color{ 255, 255, 255, 255 }, "Wall"));
+				m_walls.push_back(new Tile({ i * (m_screenWidth / m_gWidth), j * (m_screenHeight / m_gHeigth) }, m_wallsize, m_wallsize, SDL_Color{ 255, 255, 255, 255 }, "Wall"));
 				nodePos.push_back({ i * (int)(m_screenWidth / m_gWidth) + 10, j * (int)(m_screenHeight / m_gHeigth) + 10 });
 				//Node creation
 				m_nodes.addNode({ i * (m_screenWidth / m_gWidth) + 10, j * (m_screenHeight / m_gHeigth) + 10 }, "Wall");
 			}
 			else if (i > 10 && i <= 55 && j == 8) 
 			{
-				m_walls.push_back(new Tile(Vector{ i * (m_screenWidth / m_gWidth), j * (m_screenHeight / m_gHeigth) }, m_wallsize, m_wallsize, SDL_Color{ 255, 255, 255, 255 }, "Wall"));
+				m_walls.push_back(new Tile({ i * (m_screenWidth / m_gWidth), j * (m_screenHeight / m_gHeigth) }, m_wallsize, m_wallsize, SDL_Color{ 255, 255, 255, 255 }, "Wall"));
 				nodePos.push_back({ i * (int)(m_screenWidth / m_gWidth) + 10, j * (int)(m_screenHeight / m_gHeigth) + 10 });
 				//Node creation
 				m_nodes.addNode({ i * (m_screenWidth / m_gWidth) + 10, j * (m_screenHeight / m_gHeigth) + 10 }, "Wall");
 			}
 			else if (i > (m_screenWidth / 100) && i <= ((m_screenWidth / 100) * 8) && j == ((m_screenHeight / 100) * 5))
 			{
-				m_walls.push_back(new Tile(Vector{ i * (m_screenWidth / m_gWidth), j * (m_screenHeight / m_gHeigth) }, m_wallsize, m_wallsize, SDL_Color{ 255, 255, 255, 255 }, "Wall"));
+				m_walls.push_back(new Tile({ i * (m_screenWidth / m_gWidth), j * (m_screenHeight / m_gHeigth) }, m_wallsize, m_wallsize, SDL_Color{ 255, 255, 255, 255 }, "Wall"));
 				nodePos.push_back({ i * (int)(m_screenWidth / m_gWidth) + 10, j * (int)(m_screenHeight / m_gHeigth) + 10 });
 				//Node creation
 				m_nodes.addNode({ i * (m_screenWidth / m_gWidth) + 10, j * (m_screenHeight / m_gHeigth) + 10 }, "Wall");
 			}
 			else if (i > 5 && i <= 50 && j == 26) 
 			{
-				m_walls.push_back(new Tile(Vector{ i * (m_screenWidth / m_gWidth), j * (m_screenHeight / m_gHeigth) }, m_wallsize, m_wallsize, SDL_Color{ 255, 255, 255, 255 }, "Wall"));
+				m_walls.push_back(new Tile({ i * (m_screenWidth / m_gWidth), j * (m_screenHeight / m_gHeigth) }, m_wallsize, m_wallsize, SDL_Color{ 255, 255, 255, 255 }, "Wall"));
 				nodePos.push_back({ i * (int)(m_screenWidth / m_gWidth) + 10, j * (int)(m_screenHeight / m_gHeigth) + 10 });
 				//Node creation
 				m_nodes.addNode({ i * (m_screenWidth / m_gWidth) + 10, j * (m_screenHeight / m_gHeigth) + 10 }, "Wall");

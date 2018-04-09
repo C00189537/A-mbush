@@ -1,6 +1,6 @@
 #include "NodeGrid.h"
 
-void NodeGrid::addNode(Vector pos, std::string id) 
+void NodeGrid::addNode(SDL_Point pos, std::string id) 
 {
 	m_nodes.push_back(new Node(pos, id));
 }

@@ -1,17 +1,16 @@
 #pragma once
 
-#include "Vector.h"
 #include <SDL.h>
 
 class Entity 
 {
 public:
 	Entity() {}
-	Entity(Vector pos, int width, int height, SDL_Color colour);
+	Entity(SDL_Point pos, SDL_Rect r, SDL_Color colour);
 
-	void setPos(float x, float y);
-	void setPos(Vector pos);
-	Vector getPos();
+	void setPos(int x, int y);
+	void setPos(SDL_Point pos);
+	SDL_Point getPos();
 	SDL_Rect getRect();
 	void setRect(SDL_Rect r);
 
@@ -20,7 +19,7 @@ public:
 
 protected:
 
-	Vector m_pos;
+	SDL_Point m_pos;
 	SDL_Rect m_rect;
 	SDL_Color m_colour;
 };

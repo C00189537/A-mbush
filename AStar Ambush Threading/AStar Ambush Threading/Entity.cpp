@@ -1,12 +1,9 @@
 #include "Entity.h"
 
-Entity::Entity(Vector pos, int width, int height, SDL_Color colour) {
+Entity::Entity(SDL_Point pos, SDL_Rect r, SDL_Color colour) {
 	m_pos = pos;
 
-	m_rect.x = (int)pos.x;
-	m_rect.y = (int)pos.y;
-	m_rect.w = width;
-	m_rect.h = height;
+	m_rect = r;
 
 	m_colour = colour;
 }
@@ -17,17 +14,17 @@ void Entity::draw(SDL_Renderer *renderer)
 	SDL_RenderFillRect(renderer, &m_rect);
 }
 
-void Entity::setPos(float x, float y) {
+void Entity::setPos(int x, int y) {
 	m_pos.x = x;
 	m_pos.y = y;
 }
 
-void Entity::setPos(Vector pos) 
+void Entity::setPos(SDL_Point pos) 
 {
 	m_pos = pos;
 }
 
-Vector Entity::getPos() 
+SDL_Point Entity::getPos() 
 {
 	return m_pos;
 }
