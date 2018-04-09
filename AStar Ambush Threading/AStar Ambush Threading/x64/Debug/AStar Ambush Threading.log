@@ -1,25 +1,19 @@
-﻿  Entity.cpp
-c:\users\connor\desktop\a-mbush\astar ambush threading\astar ambush threading\entity.cpp(41): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\connor\desktop\a-mbush\astar ambush threading\astar ambush threading\entity.cpp(42): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  main.cpp
-c:\users\connor\desktop\a-mbush\astar ambush threading\astar ambush threading\main.cpp(39): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
-c:\users\connor\desktop\a-mbush\astar ambush threading\astar ambush threading\main.cpp(71): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'void *'
-c:\users\connor\desktop\a-mbush\astar ambush threading\astar ambush threading\main.cpp(89): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'void *'
-c:\users\connor\desktop\a-mbush\astar ambush threading\astar ambush threading\main.cpp(99): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'void *'
-c:\users\connor\desktop\a-mbush\astar ambush threading\astar ambush threading\main.cpp(106): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'void *'
-  Node.cpp
-c:\users\connor\desktop\a-mbush\astar ambush threading\astar ambush threading\node.cpp(85): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  Player.cpp
-  Tile.cpp
-  World.cpp
-c:\users\connor\desktop\a-mbush\astar ambush threading\astar ambush threading\world.cpp(42): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\connor\desktop\a-mbush\astar ambush threading\astar ambush threading\world.cpp(49): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\connor\desktop\a-mbush\astar ambush threading\astar ambush threading\world.cpp(56): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\connor\desktop\a-mbush\astar ambush threading\astar ambush threading\world.cpp(63): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\connor\desktop\a-mbush\astar ambush threading\astar ambush threading\world.cpp(70): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\connor\desktop\a-mbush\astar ambush threading\astar ambush threading\world.cpp(77): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\connor\desktop\a-mbush\astar ambush threading\astar ambush threading\world.cpp(84): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\connor\desktop\a-mbush\astar ambush threading\astar ambush threading\world.cpp(131): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+﻿  World.cpp
+c:\users\foxbl\desktop\a-mbush\astar ambush threading\astar ambush threading\world.cpp(43): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\foxbl\desktop\a-mbush\astar ambush threading\astar ambush threading\world.cpp(50): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\foxbl\desktop\a-mbush\astar ambush threading\astar ambush threading\world.cpp(57): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\foxbl\desktop\a-mbush\astar ambush threading\astar ambush threading\world.cpp(64): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\foxbl\desktop\a-mbush\astar ambush threading\astar ambush threading\world.cpp(71): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\foxbl\desktop\a-mbush\astar ambush threading\astar ambush threading\world.cpp(78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\foxbl\desktop\a-mbush\astar ambush threading\astar ambush threading\world.cpp(85): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\users\foxbl\desktop\a-mbush\astar ambush threading\astar ambush threading\world.cpp(132): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
   Generating Code...
-     Creating library C:\Users\Connor\Desktop\A-mbush\AStar Ambush Threading\x64\Debug\AStar Ambush Threading.lib and object C:\Users\Connor\Desktop\A-mbush\AStar Ambush Threading\x64\Debug\AStar Ambush Threading.exp
-  AStar Ambush Threading.vcxproj -> C:\Users\Connor\Desktop\A-mbush\AStar Ambush Threading\x64\Debug\AStar Ambush Threading.exe
+  Compiling...
+  main.cpp
+c:\users\foxbl\desktop\a-mbush\astar ambush threading\astar ambush threading\main.cpp(39): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
+c:\users\foxbl\desktop\a-mbush\astar ambush threading\astar ambush threading\main.cpp(71): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'void *'
+c:\users\foxbl\desktop\a-mbush\astar ambush threading\astar ambush threading\main.cpp(89): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'void *'
+c:\users\foxbl\desktop\a-mbush\astar ambush threading\astar ambush threading\main.cpp(99): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'void *'
+c:\users\foxbl\desktop\a-mbush\astar ambush threading\astar ambush threading\main.cpp(106): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'void *'
+  Generating Code...
+  AStar Ambush Threading.vcxproj -> C:\Users\foxbl\Desktop\A-mbush\AStar Ambush Threading\x64\Debug\AStar Ambush Threading.exe

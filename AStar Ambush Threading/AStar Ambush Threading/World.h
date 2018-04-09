@@ -17,7 +17,7 @@ public:
 	int tileSize();
 
 private:
-	std::vector<Tile*> m_tiles;
+	std::vector<Tile*> m_walls;
 
 	Player m_player;
 
@@ -25,8 +25,9 @@ private:
 
 	void setupWorld();
 
-	int gWidth = 64, gHeigth = 36;
-	float m_tileX = 20, m_tileY = 20, m_tileSize = 20;
+	float gWidth = 64, gHeigth = 36;
+	float screenWidth = 1280, screenHeight = 720;
+	float m_tileX = 20, m_tileY = 20, m_wallsize = 20;
 
 	std::vector<SDL_Point> nodePos;
 };
