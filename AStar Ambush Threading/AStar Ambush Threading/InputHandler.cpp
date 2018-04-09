@@ -1,83 +1,58 @@
 #include "InputHandler.h"
 
-InputHandler::InputHandler(EventListener *e) {
-	m_eventListener = e;
+InputHandler::InputHandler(Keys *k) 
+{
+	m_Keys = k;
 }
 
 void InputHandler::handleInput(SDL_Event *e) {
-	while (SDL_PollEvent(e)) {
-		switch (e->type) {
+	while (SDL_PollEvent(e)) 
+	{
+		switch (e->type) 
+		{
 		case SDL_KEYDOWN:
-			if (!e->key.repeat) {
-				switch (e->key.keysym.sym) {
+			if (!e->key.repeat) 
+			{
+				switch (e->key.keysym.sym) 
+				{
 				case SDLK_w:
-					m_eventListener->pressedW = true;
+					m_Keys->W = true;
 					break;
 
 				case SDLK_a:
-					m_eventListener->pressedA = true;
+					m_Keys->A = true;
 					break;
 
 				case SDLK_s:
-					m_eventListener->pressedS = true;
+					m_Keys->S = true;
 					break;
 
 				case SDLK_d:
-					m_eventListener->pressedD = true;
-					break;
-
-				case SDLK_LEFT:
-					m_eventListener->pressedLeft = true;
-					break;
-
-				case SDLK_RIGHT:
-					m_eventListener->pressedRight = true;
-					break;
-
-				case SDLK_UP:
-					m_eventListener->pressedUp = true;
-					break;
-
-				case SDLK_DOWN:
-					m_eventListener->pressedDown = true;
+					m_Keys->D = true;
 					break;
 				}
 				break;
 			}
 
 		case SDL_KEYUP:
-			if (!e->key.repeat) {
-				switch (e->key.keysym.sym) {
+			if (!e->key.repeat) 
+			{
+				switch (e->key.keysym.sym)
+				{
 				case SDLK_w:
-					m_eventListener->pressedW = false;
+					m_Keys->W = false;
 					break;
 
 				case SDLK_a:
-					m_eventListener->pressedA = false;
+					m_Keys->A = false;
 					break;
 
 				case SDLK_s:
-					m_eventListener->pressedS = false;
+					m_Keys->S = false;
 					break;
 
 				case SDLK_d:
-					m_eventListener->pressedD = false;
-					break;
-
-				case SDLK_LEFT:
-					m_eventListener->pressedLeft = false;
-					break;
-
-				case SDLK_RIGHT:
-					m_eventListener->pressedRight = false;
-					break;
-
-				case SDLK_UP:
-					m_eventListener->pressedUp = false;
-					break;
-
-				case SDLK_DOWN:
-					m_eventListener->pressedDown = false;
+					m_Keys->D = false;
 					break;
 				}
 				break;

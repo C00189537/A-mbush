@@ -1,18 +1,18 @@
 #pragma once
 
-#include "NodeLayout.h"
+#include "NodeGrid.h"
 #include "NodeCostComparer.h"
 #include <queue>
 
-class AStar {
+class AStar 
+{
 public:
-	AStar();
-	AStar(NodeLayout &nodes);
-
+	
+	AStar(NodeGrid &nodes);
 	void calculatePath(Node* pStart, Node* pDest, std::vector<Node*>& path);
 
 private:
-	NodeLayout &m_nodeLayout;
 
+	NodeGrid & m_NodeGrid;
 	void ucs(Node* pStart, Node* pDest, std::vector<Node*>& path);
 };

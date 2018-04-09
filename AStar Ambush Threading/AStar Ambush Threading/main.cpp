@@ -10,12 +10,12 @@ int main(int argc, char* argv[])
 {
 	SDL_Window* window = SDL_CreateWindow("Ambush", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, SDL_WINDOW_SHOWN);
 	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
+
 	SDL_Event *e = new SDL_Event();
+	Keys *keys = new Keys;
 
-	EventListener *eventListener = new EventListener;
-
-	InputHandler input(eventListener);
-	world.create(eventListener);
+	InputHandler input(keys);
+	world.create(keys);
 
 	bool running = true;
 
@@ -35,9 +35,9 @@ int main(int argc, char* argv[])
 	SDL_Thread* threadC = SDL_CreateThread(worker, "Thread C", (void*)"Thread C");
 
 
-	while (running) {
+	while (running) 
+	{
 		currentTime = SDL_GetTicks();
-
 		deltaTime = (currentTime - lastTime) / 1000;
 
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);

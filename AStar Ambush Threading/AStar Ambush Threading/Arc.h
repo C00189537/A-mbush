@@ -3,7 +3,8 @@
 #include "stdafx.h"
 
 class Node; // stops circular dependency between arc and node
-class Arc {
+class Arc 
+{
 public:
 	Arc() {}
 
@@ -16,6 +17,7 @@ public:
 	float getWeight();
 
 private:
+
 	Node *m_node;
 	int m_weight;
 };

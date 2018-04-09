@@ -2,18 +2,16 @@
 
 #include <iostream>
 
-Player::Player(Vector pos, int width, int height, SDL_Color colour, EventListener *listener) {
-	m_pos = pos;
-
-	m_rect.x = (int)pos.x;
-	m_rect.y = (int)pos.y;
-	m_rect.w = width;
-	m_rect.h = height;
+Player::Player(SDL_Rect r, SDL_Color colour, Keys *k) 
+{
+	m_pos.x = (int)r.x;
+	m_pos.y = (int)r.y;
+	m_rect = r;
 
 	m_colour = colour;
 	m_speed = 100;
 
-	m_listener = listener;
+	m_keys = k;
 }
 
 void Player::update(float deltaTime) {
@@ -23,18 +21,22 @@ void Player::update(float deltaTime) {
 	m_rect.y = (int)m_pos.y;
 }
 
-void Player::inputHandle(float dtime)
+void Player::inputHandle(float deltaTime)
 {
-	if (m_listener->pressedA || m_listener->pressedLeft) {
-		m_pos.x -= m_speed * dtime;
+	if (m_keys->A) 
+	{
+		m_pos.x -= m_speed * deltaTime;
 	}
-	if (m_listener->pressedD || m_listener->pressedRight) {
-		m_pos.x += m_speed * dtime;
+	if (m_keys->D) 
+	{
+		m_pos.x += m_speed * deltaTime;
 	}
-	if (m_listener->pressedW || m_listener->pressedUp) {
-		m_pos.y -= m_speed * dtime;
+	if (m_keys->W) 
+	{
+		m_pos.y -= m_speed * deltaTime;
 	}
-	if (m_listener->pressedS || m_listener->pressedDown) {
-		m_pos.y += m_speed * dtime;
+	if (m_keys->S) 
+	{
+		m_pos.y += m_speed * deltaTime;
 	}
 }

@@ -1,19 +1,20 @@
 #pragma once
 
 #include "Entity.h"
-#include "EventListener.h"
+#include "Keys.h"
 
-class Player : public Entity {
+class Player : public Entity 
+{
 public:
 
 	Player() {}
-	Player(Vector pos, int width, int height, SDL_Color colour, EventListener *listener);
+	Player(SDL_Rect r, SDL_Color colour, Keys *listener);
 
 	void update(float deltaTime);
 
 private:
-
-	EventListener *m_listener;
-	void inputHandle(float dtime);
+	//Handles input
+	Keys *m_keys;
+	void inputHandle(float deltaTime);
 	int m_speed;
 };

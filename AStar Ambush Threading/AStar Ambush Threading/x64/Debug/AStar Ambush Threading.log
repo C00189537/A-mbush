@@ -1,19 +1,8 @@
-﻿  World.cpp
-c:\users\foxbl\desktop\a-mbush\astar ambush threading\astar ambush threading\world.cpp(43): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\foxbl\desktop\a-mbush\astar ambush threading\astar ambush threading\world.cpp(50): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\foxbl\desktop\a-mbush\astar ambush threading\astar ambush threading\world.cpp(57): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\foxbl\desktop\a-mbush\astar ambush threading\astar ambush threading\world.cpp(64): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\foxbl\desktop\a-mbush\astar ambush threading\astar ambush threading\world.cpp(71): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\foxbl\desktop\a-mbush\astar ambush threading\astar ambush threading\world.cpp(78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\foxbl\desktop\a-mbush\astar ambush threading\astar ambush threading\world.cpp(85): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\foxbl\desktop\a-mbush\astar ambush threading\astar ambush threading\world.cpp(132): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+﻿  Player.cpp
+c:\users\foxbl\desktop\a-mbush\astar ambush threading\astar ambush threading\player.cpp(7): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\foxbl\desktop\a-mbush\astar ambush threading\astar ambush threading\player.cpp(8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   Generating Code...
-  Compiling...
+  Skipping... (no relevant changes detected)
   main.cpp
-c:\users\foxbl\desktop\a-mbush\astar ambush threading\astar ambush threading\main.cpp(39): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
-c:\users\foxbl\desktop\a-mbush\astar ambush threading\astar ambush threading\main.cpp(71): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'void *'
-c:\users\foxbl\desktop\a-mbush\astar ambush threading\astar ambush threading\main.cpp(89): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'void *'
-c:\users\foxbl\desktop\a-mbush\astar ambush threading\astar ambush threading\main.cpp(99): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'void *'
-c:\users\foxbl\desktop\a-mbush\astar ambush threading\astar ambush threading\main.cpp(106): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'void *'
-  Generating Code...
+  World.cpp
   AStar Ambush Threading.vcxproj -> C:\Users\foxbl\Desktop\A-mbush\AStar Ambush Threading\x64\Debug\AStar Ambush Threading.exe
