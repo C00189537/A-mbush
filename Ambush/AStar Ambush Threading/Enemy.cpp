@@ -12,3 +12,7 @@ Enemy::Enemy(SDL_Point pos, SDL_Rect r, SDL_Color colour, int speed) {
 
 }
 
+void Enemy::update(float deltaTime)
+{
+
+}

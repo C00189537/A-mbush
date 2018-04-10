@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SDL.h>
+#include <string>
 
 class Entity 
 {
@@ -17,9 +18,13 @@ public:
 	void update(float deltaTime);
 	void draw(SDL_Renderer *renderer);
 
+	void setID(std::string id) { m_id = id; };
+	std::string getID() { return m_id; };
+
 protected:
 
 	SDL_Point m_pos;
 	SDL_Rect m_rect;
 	SDL_Color m_colour;
+	std::string m_id;
 };

@@ -3,13 +3,15 @@
 
 int worker(void* data);
 SDL_sem* gDataLock = NULL;
-int gData = 0;
+int collisionData = -1, enemyData = -1;
 World world;
 
 int main(int argc, char* argv[])
 {
-	SDL_Window* window = SDL_CreateWindow("Ambush", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1920, 1080, SDL_WINDOW_SHOWN);
-	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
+	SDL_Window* window = SDL_CreateWindow("Ambush", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, SDL_WINDOW_SHOWN);
+	SDL_Renderer* r = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
+
+	SDL_SetRenderDrawBlendMode(r, SDL_BLENDMODE_BLEND);
 
 	SDL_Event *e = new SDL_Event();
 	Keys *keys = new Keys;
@@ -47,8 +49,8 @@ int main(int argc, char* argv[])
 		currentTime = SDL_GetTicks();
 		deltaTime = (currentTime - lastTime) / 1000;
 
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-		SDL_RenderClear(renderer);
+		SDL_SetRenderDrawColor(r, 0, 0, 0, 0);
+		SDL_RenderClear(r);
 
 		if (deltaTime > timePerFrame) {
 			input.handleInput(e);
@@ -58,20 +60,20 @@ int main(int argc, char* argv[])
 			lastTime = currentTime;
 		}
 
-		world.draw(renderer);
+		world.draw(r);
 
-		SDL_RenderPresent(renderer);
+		SDL_RenderPresent(r);
 	}
 
 	//Wait for threads to finish
 	SDL_WaitThread(threadA, NULL);
 	SDL_WaitThread(threadB, NULL);
-	SDL_WaitThread(threadC, NULL);
+	/*SDL_WaitThread(threadC, NULL);
 	SDL_WaitThread(threadD, NULL);
 	SDL_WaitThread(threadE, NULL);
 	SDL_WaitThread(threadF, NULL);
 	SDL_WaitThread(threadG, NULL);
-	SDL_WaitThread(threadH, NULL);
+	SDL_WaitThread(threadH, NULL);*/
 
 	return 0;
 }
@@ -89,30 +91,43 @@ int worker(void* data)
 	while(run4ever)
 	{
 		//Check the collision
-		if (world.tileSize() > 0)
-		{
-			world.checkCollision(gData);
-		}
-
 		//Lock
 		SDL_SemWait(gDataLock);
 
 		//Index of the entity to be checked
-		printf("%s gets %d\n", data, gData);
+		//printf("%s gets %d\n", data, collisionData);
+		//printf("%s gets %d\n", data, enemyData);
 
 		//"increment the index
-		gData++;
-		if (gData >= world.tileSize())
+		collisionData++;
+		if (collisionData >= world.tileSize())
 		{
 			//Reset the search
-			gData = 0;
+			collisionData = 0;
+		}
+		if (world.generateEnemiesPath == true)
+		{
+			enemyData++;
+		}
+		if (enemyData >= world.MAX_ENEMIES)
+		{
+			world.generateEnemiesPath = false;
 		}
 		//Print post work data
-		printf("%s sets %d\n\n", data, gData);
+		//printf("%s sets %d\n\n", data, collisionData);
+		//printf("%s sets %d\n", data, enemyData);
 
 		//Unlock
 		SDL_SemPost(gDataLock);
 
+		if (world.tileSize() >= 0)
+		{
+			world.checkCollision(collisionData);
+		}
+		if (world.generateEnemiesPath)
+		{
+			//std::cout << "generateEnemies" << std::endl;
+		}
 	}
 
 	printf("%s finished!\n\n", data);
