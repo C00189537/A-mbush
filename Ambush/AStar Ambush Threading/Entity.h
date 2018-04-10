@@ -1,0 +1,25 @@
+#pragma once
+
+#include <SDL.h>
+
+class Entity 
+{
+public:
+	Entity() {}
+	Entity(SDL_Point pos, SDL_Rect r, SDL_Color colour);
+
+	void setPos(int x, int y);
+	void setPos(SDL_Point pos);
+	SDL_Point getPos();
+	SDL_Rect getRect();
+	void setRect(SDL_Rect r);
+
+	void update(float deltaTime);
+	void draw(SDL_Renderer *renderer);
+
+protected:
+
+	SDL_Point m_pos;
+	SDL_Rect m_rect;
+	SDL_Color m_colour;
+};

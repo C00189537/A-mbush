@@ -1,0 +1,3 @@
+﻿  World.cpp
+c:\users\foxbl\desktop\a-mbush\ambush\astar ambush threading\world.cpp(130): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  AStar Ambush Threading.vcxproj -> C:\Users\foxbl\Desktop\A-mbush\Ambush\x64\Debug\AStar Ambush Threading.exe
