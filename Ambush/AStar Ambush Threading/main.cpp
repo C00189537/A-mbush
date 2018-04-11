@@ -1,14 +1,15 @@
 #include "World.h"
 
 
-int worker(void* data);
+int collisionWorker(void* data);
+int aiWorker(void* data);
 SDL_sem* gDataLock = NULL;
-int collisionData = -1, enemyData = -1;
+int collisionData = 0, enemyData = 0;
 World world;
 
 int main(int argc, char* argv[])
 {
-	SDL_Window* window = SDL_CreateWindow("Ambush", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, SDL_WINDOW_SHOWN);
+	SDL_Window* window = SDL_CreateWindow("Ambush", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1920, 1080, SDL_WINDOW_SHOWN);
 	SDL_Renderer* r = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
 
 	SDL_SetRenderDrawBlendMode(r, SDL_BLENDMODE_BLEND);
@@ -32,16 +33,15 @@ int main(int argc, char* argv[])
 	gDataLock = SDL_CreateSemaphore(1);
 	srand(SDL_GetTicks());
 
-	SDL_Thread* threadA = SDL_CreateThread(worker, "Thread A", (void*)"Thread A");
-	SDL_Thread* threadB = SDL_CreateThread(worker, "Thread B", (void*)"Thread B");
-	SDL_Thread* threadC = SDL_CreateThread(worker, "Thread C", (void*)"Thread C");
+	SDL_Thread* threadA = SDL_CreateThread(collisionWorker, "Thread A", (void*)"Thread A");
+	SDL_Thread* threadB = SDL_CreateThread(collisionWorker, "Thread B", (void*)"Thread B");
+	SDL_Thread* threadC = SDL_CreateThread(collisionWorker, "Thread C", (void*)"Thread C");
 
-	SDL_Thread* threadD = SDL_CreateThread(worker, "Thread D", (void*)"Thread D");
-	SDL_Thread* threadE = SDL_CreateThread(worker, "Thread E", (void*)"Thread E");
-	SDL_Thread* threadF = SDL_CreateThread(worker, "Thread F", (void*)"Thread F");
-
-	SDL_Thread* threadG = SDL_CreateThread(worker, "Thread G", (void*)"Thread G");
-	SDL_Thread* threadH = SDL_CreateThread(worker, "Thread H", (void*)"Thread H");
+	SDL_Thread* threadD = SDL_CreateThread(aiWorker, "Thread D", (void*)"Thread D");
+	SDL_Thread* threadE = SDL_CreateThread(aiWorker, "Thread E", (void*)"Thread E");
+	SDL_Thread* threadF = SDL_CreateThread(aiWorker, "Thread F", (void*)"Thread F");
+	SDL_Thread* threadG = SDL_CreateThread(aiWorker, "Thread G", (void*)"Thread G");
+	SDL_Thread* threadH = SDL_CreateThread(aiWorker, "Thread H", (void*)"Thread H");
 
 
 	while (running) 
@@ -68,8 +68,8 @@ int main(int argc, char* argv[])
 	//Wait for threads to finish
 	SDL_WaitThread(threadA, NULL);
 	SDL_WaitThread(threadB, NULL);
-	/*SDL_WaitThread(threadC, NULL);
-	SDL_WaitThread(threadD, NULL);
+	SDL_WaitThread(threadC, NULL);
+	/*SDL_WaitThread(threadD, NULL);
 	SDL_WaitThread(threadE, NULL);
 	SDL_WaitThread(threadF, NULL);
 	SDL_WaitThread(threadG, NULL);
@@ -79,7 +79,7 @@ int main(int argc, char* argv[])
 }
 
 
-int worker(void* data)
+int collisionWorker(void* data)
 {
 
 	printf("%s starting...\n", data);
@@ -91,12 +91,13 @@ int worker(void* data)
 	while(run4ever)
 	{
 		//Check the collision
+		if (world.tileSize() >= 0)
+		{
+			world.checkCollision(collisionData);
+		}
+
 		//Lock
 		SDL_SemWait(gDataLock);
-
-		//Index of the entity to be checked
-		//printf("%s gets %d\n", data, collisionData);
-		//printf("%s gets %d\n", data, enemyData);
 
 		//"increment the index
 		collisionData++;
@@ -105,17 +106,39 @@ int worker(void* data)
 			//Reset the search
 			collisionData = 0;
 		}
-		if (world.generateEnemiesPath == true)
-		{
-			enemyData++;
-		}
+		//world.tileHit = true;
+		//Unlock
+		SDL_SemPost(gDataLock);
+	}
+
+	printf("%s finished!\n\n", data);
+
+	return 0;
+}
+
+
+int aiWorker(void* data)
+{
+
+	printf("%s starting...\n", data);
+
+	srand(SDL_GetTicks());
+
+	bool run4ever = true;
+
+	while (run4ever)
+	{
+		//Check the collision
+		//Lock
+		SDL_SemWait(gDataLock);
+
+		//"increment the index
+		enemyData++;
+
 		if (enemyData >= world.MAX_ENEMIES)
 		{
 			world.generateEnemiesPath = false;
 		}
-		//Print post work data
-		//printf("%s sets %d\n\n", data, collisionData);
-		//printf("%s sets %d\n", data, enemyData);
 
 		//Unlock
 		SDL_SemPost(gDataLock);
@@ -124,7 +147,7 @@ int worker(void* data)
 		{
 			world.checkCollision(collisionData);
 		}
-		if (world.generateEnemiesPath)
+		if (world.enemySize() >= 0)
 		{
 			//std::cout << "generateEnemies" << std::endl;
 		}
@@ -134,4 +157,3 @@ int worker(void* data)
 
 	return 0;
 }
-

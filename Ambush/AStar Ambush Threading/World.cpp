@@ -11,10 +11,17 @@ void World::create(Keys *k)
 	aWholeNewWorld();
 	m_nodes.setColumnSize(100);
 	m_nodes.addArcs();
-	m_player = Player{ {100, 50}, {100, 50, 20, 20}, SDL_Color{ 255, 165, 0, 255 }, k };
-	m_playerSpawn = { (m_screenWidth / 100) * 40, (m_screenHeight / 100) * 10, (m_screenWidth / 100) * 20, (m_screenHeight / 100) * 30};
-	m_enemySpawn = { (m_screenWidth / 100) * 25, (m_screenHeight / 100) * 60, (m_screenWidth / 100) * 40, (m_screenHeight / 100) * 30 };
+	
+	m_playerSpawn = { (m_screenWidth / 100) * 20, (m_screenHeight / 100) * 10, (m_screenWidth / 100) * 20, (m_screenHeight / 100) * 30};
+	m_enemySpawn = { (m_screenWidth / 100) * 15, (m_screenHeight / 100) * 60, (m_screenWidth / 100) * 30, (m_screenHeight / 100) * 30 };
+
+	//Spawn enemies and player in their zones
+	spawnPoints();
+	createPlayer(k);
 	createEnemies();
+
+
+	
 }
 void World::update(float deltaTime) 
 {
@@ -36,10 +43,10 @@ void World::draw(SDL_Renderer *r)
 	{	
 		SDL_RenderDrawPoints(renderer, &nodePos.at(i), 1);
 	}*/
-	//m_nodes.draw(renderer);
-	for (int i = 0; i < enemies.size(); i++)
+	//m_nodes.draw(r);
+	for (int i = 0; i < m_enemies.size(); i++)
 	{
-		enemies.at(i)->draw(r);
+		m_enemies.at(i)->draw(r);
 	}
 	m_player.draw(r);
 }
@@ -96,6 +103,7 @@ void World::aWholeNewWorld() {
 			{
 				//Floor
 				m_walls.push_back(new Tile({ i * (m_screenWidth / m_gWidth), j * (m_screenHeight / m_gHeigth) }, m_wallsize.x, m_wallsize.y, SDL_Color{ 0, 0, 0, 255 }, "Floor"));
+				m_floors.push_back({ i * (m_screenWidth / m_gWidth), j * (m_screenHeight / m_gHeigth) });
 				nodePos.push_back({ i * (m_screenWidth / m_gWidth) + (m_wallsize.x / 2), j * (m_screenHeight / m_gHeigth) + (m_wallsize.y / 2) });
 				m_nodes.addNode({ i * (m_screenWidth / m_gWidth) + (m_wallsize.x / 2), j * (m_screenHeight / m_gHeigth) + (m_wallsize.y / 2) }, "Floor");
 			}
@@ -111,17 +119,16 @@ void World::checkCollision(int i)
 	{
 		if (SDL_IntersectRect(&m_player.getRect(), &m_walls.at(i)->getRect(), &result))
 		{
-		
 			if (result.w > result.h)
 			{
 				if (m_player.getRect().y > m_walls.at(i)->getRect().y)
 				{
-					m_player.setPos(m_player.getPos().x, m_player.getPos().y + result.h);
+					m_player.setPos(m_player.getPos().x, m_player.getPos().y + result.h / 2);
 					m_player.setVelocity({ m_player.getVelocity().x, 0 });
 				}
 				else
 				{
-					m_player.setPos(m_player.getPos().x, m_player.getPos().y - result.h);
+					m_player.setPos(m_player.getPos().x, m_player.getPos().y - result.h / 2);
 					m_player.setVelocity({ m_player.getVelocity().x, 0 });
 				}
 			}
@@ -129,40 +136,80 @@ void World::checkCollision(int i)
 			{
 				if (m_player.getRect().x > m_walls.at(i)->getRect().x)
 				{
-					m_player.setPos(m_player.getPos().x + result.w, m_player.getPos().y);
+					m_player.setPos(m_player.getPos().x + result.w / 2, m_player.getPos().y);
 					m_player.setVelocity({ 0, m_player.getVelocity().y });
 				}
 				else
 				{
-					m_player.setPos(m_player.getPos().x - result.w, m_player.getPos().y);
+					m_player.setPos(m_player.getPos().x - result.w / 2, m_player.getPos().y);
 					m_player.setVelocity({ 0, m_player.getVelocity().y });
 				}
 			}
 		}
 	}
-
 }
 
 int World::tileSize()
 {
 	return m_walls.size();
 }
+int World::enemySize()
+{
+	return m_enemies.size();
+}
 
 void World::createEnemies()
 {
+	srand(SDL_GetTicks());
+	
+
 	for (int i = 0; i < MAX_ENEMIES; i++)
 	{
+		SDL_Point pos = { m_enemySpawnPoints.at(rand() % m_enemySpawnPoints.size()).x,  m_enemySpawnPoints.at(rand() % m_enemySpawnPoints.size()).y };
+
 		switch ((rand() % 3) + 1)
 		{
 		case 1:
-			enemies.push_back(enemyPool->BlueEnemy({ 100, 50 }));
+			m_enemies.push_back(enemyPool->BlueEnemy({ pos.x, pos.y }));
 			break;
 		case 2:
-			enemies.push_back(enemyPool->GreenEnemy({ 200, 50 }));
+			m_enemies.push_back(enemyPool->GreenEnemy({ pos.x, pos.y }));
 			break;
 		case 3:
-			enemies.push_back(enemyPool->RedEnemy({ 300, 50 }));
+			m_enemies.push_back(enemyPool->RedEnemy({ pos.x, pos.y }));
 			break;
 		}
 	}
+}
+
+void World::spawnPoints()
+{
+
+	for (int i = 0; i < m_floors.size(); i++)
+	{
+		if (m_floors.at(i).x >= (m_screenWidth / 100) * 20 
+			&& m_floors.at(i).x <= (m_screenWidth / 100) * 20 + (m_screenWidth / 100) * 20
+			&& m_floors.at(i).y >= (m_screenHeight / 100) * 10
+			&& m_floors.at(i).y <= (m_screenHeight / 100) * 10 + (m_screenHeight / 100) * 30)
+		{
+			m_playerSpawnPoints.push_back(m_floors.at(i));
+		}
+
+		if (m_floors.at(i).x >= (m_screenWidth / 100) * 15
+			&& m_floors.at(i).x <= (m_screenWidth / 100) * 15 + (m_screenWidth / 100) * 29
+			&& m_floors.at(i).y >= (m_screenHeight / 100) * 60
+			&& m_floors.at(i).y <= (m_screenHeight / 100) * 60 + (m_screenHeight / 100) * 29)
+		{
+			m_enemySpawnPoints.push_back(m_floors.at(i));
+		}
+	}
+
+}
+
+void World::createPlayer(Keys* k)
+{
+	srand(SDL_GetTicks());
+	SDL_Point pos = { m_playerSpawnPoints.at(rand() % m_playerSpawnPoints.size()).x,  m_playerSpawnPoints.at(rand() % m_playerSpawnPoints.size()).y };
+	m_player = Player{ { pos.x, pos.y },{ pos.x, pos.y, 20, 20 }, SDL_Color{ 255, 165, 0, 255 }, k };
+
 }

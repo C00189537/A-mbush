@@ -8,7 +8,7 @@ Player::Player(SDL_Point pos, SDL_Rect r, SDL_Color colour, Keys *k)
 	m_rect = r;
 
 	m_colour = colour;
-	m_speed = 100;
+	m_speed = 40;
 
 	m_velocity = { 0, 0 };
 	m_keys = k;
@@ -21,7 +21,25 @@ void Player::update(float deltaTime) {
 	m_pos.x += m_velocity.x;
 	m_pos.y += m_velocity.y;
 
-	friction();
+	//Deal with max speed
+	if (m_velocity.x >= MAX_XVEL)
+	{
+		m_velocity.x = MAX_XVEL;
+	}
+	if (m_velocity.x <= -MAX_XVEL)
+	{
+		m_velocity.x = -MAX_XVEL;
+	}
+	if (m_velocity.y >= MAX_XVEL)
+	{
+		m_velocity.y = MAX_YVEL;
+	}
+	if (m_velocity.y <= -MAX_XVEL)
+	{
+		m_velocity.y = -MAX_YVEL;
+	}
+
+	//friction();
 	m_rect.x = m_pos.x;
 	m_rect.y = m_pos.y;
 }

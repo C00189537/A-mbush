@@ -1,4 +1,7 @@
 ﻿  World.cpp
-c:\users\foxbl\desktop\a-mbush\ambush\astar ambush threading\world.cpp(147): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-     Creating library C:\Users\foxbl\Desktop\A-mbush\Ambush\x64\Debug\AStar Ambush Threading.lib and object C:\Users\foxbl\Desktop\A-mbush\Ambush\x64\Debug\AStar Ambush Threading.exp
+c:\users\foxbl\desktop\a-mbush\ambush\astar ambush threading\world.cpp(154): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+c:\users\foxbl\desktop\a-mbush\ambush\astar ambush threading\world.cpp(158): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  main.cpp
   AStar Ambush Threading.vcxproj -> C:\Users\foxbl\Desktop\A-mbush\Ambush\x64\Debug\AStar Ambush Threading.exe
