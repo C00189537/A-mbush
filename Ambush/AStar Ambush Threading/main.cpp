@@ -2,7 +2,9 @@
 
 
 int worker(void* data);
+int workerAI(void* data);
 SDL_sem* gDataLock = NULL;
+SDL_sem* gDataLock2 = NULL;
 int collisionData = -1, enemyData = -1;
 World world;
 
@@ -30,14 +32,15 @@ int main(int argc, char* argv[])
 	
 
 	gDataLock = SDL_CreateSemaphore(1);
+	gDataLock2 = SDL_CreateSemaphore(1);
 	srand(SDL_GetTicks());
 
 	SDL_Thread* threadA = SDL_CreateThread(worker, "Collision", (void*)"Collision");
 	SDL_Thread* threadB = SDL_CreateThread(worker, "Collision", (void*)"Collision");
 	SDL_Thread* threadC = SDL_CreateThread(worker, "Collision", (void*)"Collision");
 
-	SDL_Thread* threadD = SDL_CreateThread(worker, "AI", (void*)"AI");
-	SDL_Thread* threadE = SDL_CreateThread(worker, "AI", (void*)"AI");
+	SDL_Thread* threadD = SDL_CreateThread(workerAI, "AI", (void*)"AI");
+	SDL_Thread* threadE = SDL_CreateThread(workerAI, "AI", (void*)"AI");
 	SDL_Thread* threadF = SDL_CreateThread(worker, "AI", (void*)"AI");
 	SDL_Thread* threadG = SDL_CreateThread(worker, "AI", (void*)"AI");
 	SDL_Thread* threadH = SDL_CreateThread(worker, "AI", (void*)"AI");
@@ -89,44 +92,58 @@ int worker(void* data)
 		
 		//Lock
 		SDL_SemWait(gDataLock);
-		if (data == "Collision")
-		{
-			//"increment the index
-			collisionData++;
-			if (collisionData >= world.tileSize())
-			{
-				//Reset the search
-				collisionData = 0;
-			}
-		}
-		else if (data == "AI")
-		{
-			//"increment the index
-			enemyData++;
 
-			if (enemyData >= world.MAX_ENEMIES)
-			{
-				enemyData = 0;
-			}
+		//"increment the index
+		collisionData++;
+		if (collisionData >= world.tileSize())
+		{
+			//Reset the search
+			collisionData = 0;
 		}
 		//Unlock
 		SDL_SemPost(gDataLock);
 
-		if (data == "Collision")
+		//Check the collision
+		if (world.tileSize() >= 0)
 		{
-			//Check the collision
-			if (world.tileSize() >= 0)
-			{
-				world.checkCollision(collisionData);
-			}
+			world.checkCollision(collisionData);
 		}
-		else if (data == "AI")
+	}
+
+	printf("%s finished!\n\n", data);
+
+	return 0;
+}
+
+
+int workerAI(void* data)
+{
+
+	printf("%s starting...\n", data);
+	bool run4ever = true;
+
+	while (run4ever)
+	{
+
+		//Lock
+		SDL_SemWait(gDataLock2);
+		
+		//"increment the index
+		enemyData++;
+		if (enemyData >= world.MAX_ENEMIES)
 		{
-			if (world.enemySize() >= 0)
-			{
-				world.enemyPath(enemyData);
-			}
+			enemyData = 0;
 		}
+		
+		//Unlock
+		SDL_SemPost(gDataLock2);
+
+
+		if (world.enemySize() >= 0)
+		{
+			world.enemyPath(enemyData);
+		}
+		
 	}
 
 	printf("%s finished!\n\n", data);

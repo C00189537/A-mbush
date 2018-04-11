@@ -8,7 +8,9 @@
 #include "InputHandler.h"
 #include "EnemyType.h"
 
-class World {
+
+class World 
+{
 public:
 	World();
 

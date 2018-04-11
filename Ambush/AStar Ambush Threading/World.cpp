@@ -1,6 +1,6 @@
 #include "World.h"
 
-int distanceFormula(SDL_Point p1, SDL_Point p2);
+int distance(SDL_Point p1, SDL_Point p2);
 
 World::World()
 {
@@ -116,7 +116,7 @@ void World::aWholeNewWorld() {
 void World::checkCollision(int i)
 {
 	SDL_Rect result = {0, 0};
-	
+
 	if (m_walls.at(i)->getID() == "Wall")
 	{
 		if (SDL_IntersectRect(&m_player.getRect(), &m_walls.at(i)->getRect(), &result))
@@ -218,26 +218,30 @@ void World::createPlayer(Keys* k)
 Node* World::proximityNode(SDL_Point p)
 {
 	SDL_Point result = {0, 0};
-	Node* temp = new Node();
+	float smallest = 100000;
+	
+
+	Node* tempNode = new Node();
 	for (int i = 0; i < m_nodes.getNodesSize(); i++)
 	{
 		if (m_nodes.getNodes().at(i)->getID() == "Floor")
 		{	
-			if (distanceFormula(p, m_nodes.getNodes().at(i)->getPos()) <= 25 && distanceFormula(p, m_nodes.getNodes().at(i)->getPos()) >= 0)
+			float temp = distance(m_player.getPos(), m_nodes.getNodes().at(i)->getPos());
+			if (temp < smallest)
 			{
-				temp = m_nodes.getNodes().at(i);
-				return temp;
+				smallest = temp;
+				tempNode = m_nodes.getNodes().at(i);
 			}
 		}
 	}
-	return temp;
+	return tempNode;
 }
 void World::enemyPath(int i)
 {
-	//m_astar->calculatePath(proximityNode(m_enemies.at(i)->getPos()), proximityNode(m_player.getPos()), m_enemies.at(i)->nodePath);
-	//std::cout << "Path made" << i << std::endl;
+	m_astar->calculatePath(proximityNode(m_enemies.at(i)->getPos()), proximityNode(m_player.getPos()), m_enemies.at(i)->nodePath);
+	//std::cout << "Path made" << std::endl;
 }
-int distanceFormula(SDL_Point p1, SDL_Point p2)
+int distance(SDL_Point p1, SDL_Point p2)
 {
 	return sqrt(((p2.x - p1.x) * (p2.x - p1.x)) + ((p2.y - p1.y) * (p2.y - p1.y)));
 }
