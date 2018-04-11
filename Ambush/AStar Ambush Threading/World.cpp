@@ -1,5 +1,7 @@
 #include "World.h"
 
+int distanceFormula(SDL_Point p1, SDL_Point p2);
+
 World::World()
 {
 
@@ -9,7 +11,7 @@ void World::create(Keys *k)
 	m_wallsize = { (m_screenWidth / m_gWidth), (m_screenHeight / m_gHeigth) };
 	enemyPool = new	EnemyType();
 	aWholeNewWorld();
-	m_nodes.setColumnSize(100);
+	m_nodes.setColumnSize(30);
 	m_nodes.addArcs();
 	
 	m_playerSpawn = { (m_screenWidth / 100) * 20, (m_screenHeight / 100) * 10, (m_screenWidth / 100) * 20, (m_screenHeight / 100) * 30};
@@ -20,7 +22,7 @@ void World::create(Keys *k)
 	createPlayer(k);
 	createEnemies();
 
-
+	m_astar = new AStar(m_nodes);
 	
 }
 void World::update(float deltaTime) 
@@ -43,7 +45,7 @@ void World::draw(SDL_Renderer *r)
 	{	
 		SDL_RenderDrawPoints(renderer, &nodePos.at(i), 1);
 	}*/
-	//m_nodes.draw(r);
+	m_nodes.draw(r);
 	for (int i = 0; i < m_enemies.size(); i++)
 	{
 		m_enemies.at(i)->draw(r);
@@ -121,29 +123,28 @@ void World::checkCollision(int i)
 		{
 			if (result.w > result.h)
 			{
-				if (m_player.getRect().y > m_walls.at(i)->getRect().y)
+				if (m_player.getPos().y > m_walls.at(i)->getPos().y)
 				{
-					m_player.setPos(m_player.getPos().x, m_player.getPos().y + result.h / 2);
-					m_player.setVelocity({ m_player.getVelocity().x, 0 });
+					//set the player position back to the temp rect plus the x position stays the same
+					m_player.setPos({ m_player.getPos().x, m_player.getRect().y + result.h });
 				}
 				else
 				{
-					m_player.setPos(m_player.getPos().x, m_player.getPos().y - result.h / 2);
-					m_player.setVelocity({ m_player.getVelocity().x, 0 });
+					m_player.setPos({ m_player.getPos().x, m_player.getRect().y - result.h });
 				}
+				m_player.setVelocity({ m_player.getVelocity().x, 0 });
 			}
 			else
 			{
-				if (m_player.getRect().x > m_walls.at(i)->getRect().x)
+				if (m_player.getPos().x > m_walls.at(i)->getPos().x)
 				{
-					m_player.setPos(m_player.getPos().x + result.w / 2, m_player.getPos().y);
-					m_player.setVelocity({ 0, m_player.getVelocity().y });
+					m_player.setPos({ m_player.getRect().x + result.w, m_player.getPos().y });
 				}
 				else
 				{
-					m_player.setPos(m_player.getPos().x - result.w / 2, m_player.getPos().y);
-					m_player.setVelocity({ 0, m_player.getVelocity().y });
+					m_player.setPos({ m_player.getRect().x - result.w, m_player.getPos().y });
 				}
+				m_player.setVelocity({ 0, m_player.getVelocity().y });
 			}
 		}
 	}
@@ -211,5 +212,32 @@ void World::createPlayer(Keys* k)
 	srand(SDL_GetTicks());
 	SDL_Point pos = { m_playerSpawnPoints.at(rand() % m_playerSpawnPoints.size()).x,  m_playerSpawnPoints.at(rand() % m_playerSpawnPoints.size()).y };
 	m_player = Player{ { pos.x, pos.y },{ pos.x, pos.y, 20, 20 }, SDL_Color{ 255, 165, 0, 255 }, k };
+	
 
+}
+Node* World::proximityNode(SDL_Point p)
+{
+	SDL_Point result = {0, 0};
+	Node* temp = new Node();
+	for (int i = 0; i < m_nodes.getNodesSize(); i++)
+	{
+		if (m_nodes.getNodes().at(i)->getID() == "Floor")
+		{	
+			if (distanceFormula(p, m_nodes.getNodes().at(i)->getPos()) <= 25 && distanceFormula(p, m_nodes.getNodes().at(i)->getPos()) >= 0)
+			{
+				temp = m_nodes.getNodes().at(i);
+				return temp;
+			}
+		}
+	}
+	return temp;
+}
+void World::enemyPath(int i)
+{
+	//m_astar->calculatePath(proximityNode(m_enemies.at(i)->getPos()), proximityNode(m_player.getPos()), m_enemies.at(i)->nodePath);
+	//std::cout << "Path made" << i << std::endl;
+}
+int distanceFormula(SDL_Point p1, SDL_Point p2)
+{
+	return sqrt(((p2.x - p1.x) * (p2.x - p1.x)) + ((p2.y - p1.y) * (p2.y - p1.y)));
 }

@@ -1,7 +1,11 @@
-﻿  World.cpp
-c:\users\foxbl\desktop\a-mbush\ambush\astar ambush threading\world.cpp(154): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-c:\users\foxbl\desktop\a-mbush\ambush\astar ambush threading\world.cpp(158): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+﻿  main.cpp
+c:\users\foxbl\desktop\a-mbush\ambush\astar ambush threading\main.cpp(48): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
+c:\users\foxbl\desktop\a-mbush\ambush\astar ambush threading\main.cpp(84): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'void *'
+c:\users\foxbl\desktop\a-mbush\ambush\astar ambush threading\main.cpp(132): warning C4477: 'printf' : format string '%s' requires an argument of type 'char *', but variadic argument 1 has type 'void *'
+  World.cpp
+c:\users\foxbl\desktop\a-mbush\ambush\astar ambush threading\world.cpp(155): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+c:\users\foxbl\desktop\a-mbush\ambush\astar ambush threading\world.cpp(159): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+c:\users\foxbl\desktop\a-mbush\ambush\astar ambush threading\world.cpp(242): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
   Generating Code...
-  Skipping... (no relevant changes detected)
-  main.cpp
+     Creating library C:\Users\foxbl\Desktop\A-mbush\Ambush\x64\Debug\AStar Ambush Threading.lib and object C:\Users\foxbl\Desktop\A-mbush\Ambush\x64\Debug\AStar Ambush Threading.exp
   AStar Ambush Threading.vcxproj -> C:\Users\foxbl\Desktop\A-mbush\Ambush\x64\Debug\AStar Ambush Threading.exe

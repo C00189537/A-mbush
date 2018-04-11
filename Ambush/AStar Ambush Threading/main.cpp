@@ -1,15 +1,14 @@
 #include "World.h"
 
 
-int collisionWorker(void* data);
-int aiWorker(void* data);
+int worker(void* data);
 SDL_sem* gDataLock = NULL;
-int collisionData = 0, enemyData = 0;
+int collisionData = -1, enemyData = -1;
 World world;
 
 int main(int argc, char* argv[])
 {
-	SDL_Window* window = SDL_CreateWindow("Ambush", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1920, 1080, SDL_WINDOW_SHOWN);
+	SDL_Window* window = SDL_CreateWindow("Ambush", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1000, 1000, SDL_WINDOW_SHOWN);
 	SDL_Renderer* r = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
 
 	SDL_SetRenderDrawBlendMode(r, SDL_BLENDMODE_BLEND);
@@ -33,15 +32,15 @@ int main(int argc, char* argv[])
 	gDataLock = SDL_CreateSemaphore(1);
 	srand(SDL_GetTicks());
 
-	SDL_Thread* threadA = SDL_CreateThread(collisionWorker, "Thread A", (void*)"Thread A");
-	SDL_Thread* threadB = SDL_CreateThread(collisionWorker, "Thread B", (void*)"Thread B");
-	SDL_Thread* threadC = SDL_CreateThread(collisionWorker, "Thread C", (void*)"Thread C");
+	SDL_Thread* threadA = SDL_CreateThread(worker, "Collision", (void*)"Collision");
+	SDL_Thread* threadB = SDL_CreateThread(worker, "Collision", (void*)"Collision");
+	SDL_Thread* threadC = SDL_CreateThread(worker, "Collision", (void*)"Collision");
 
-	SDL_Thread* threadD = SDL_CreateThread(aiWorker, "Thread D", (void*)"Thread D");
-	SDL_Thread* threadE = SDL_CreateThread(aiWorker, "Thread E", (void*)"Thread E");
-	SDL_Thread* threadF = SDL_CreateThread(aiWorker, "Thread F", (void*)"Thread F");
-	SDL_Thread* threadG = SDL_CreateThread(aiWorker, "Thread G", (void*)"Thread G");
-	SDL_Thread* threadH = SDL_CreateThread(aiWorker, "Thread H", (void*)"Thread H");
+	SDL_Thread* threadD = SDL_CreateThread(worker, "AI", (void*)"AI");
+	SDL_Thread* threadE = SDL_CreateThread(worker, "AI", (void*)"AI");
+	SDL_Thread* threadF = SDL_CreateThread(worker, "AI", (void*)"AI");
+	SDL_Thread* threadG = SDL_CreateThread(worker, "AI", (void*)"AI");
+	SDL_Thread* threadH = SDL_CreateThread(worker, "AI", (void*)"AI");
 
 
 	while (running) 
@@ -69,46 +68,65 @@ int main(int argc, char* argv[])
 	SDL_WaitThread(threadA, NULL);
 	SDL_WaitThread(threadB, NULL);
 	SDL_WaitThread(threadC, NULL);
-	/*SDL_WaitThread(threadD, NULL);
+	SDL_WaitThread(threadD, NULL);
 	SDL_WaitThread(threadE, NULL);
 	SDL_WaitThread(threadF, NULL);
 	SDL_WaitThread(threadG, NULL);
-	SDL_WaitThread(threadH, NULL);*/
+	SDL_WaitThread(threadH, NULL);
 
 	return 0;
 }
 
 
-int collisionWorker(void* data)
+int worker(void* data)
 {
 
 	printf("%s starting...\n", data);
-
-	srand(SDL_GetTicks());
-
 	bool run4ever = true;
 
 	while(run4ever)
 	{
-		//Check the collision
-		if (world.tileSize() >= 0)
-		{
-			world.checkCollision(collisionData);
-		}
-
+		
 		//Lock
 		SDL_SemWait(gDataLock);
-
-		//"increment the index
-		collisionData++;
-		if (collisionData >= world.tileSize())
+		if (data == "Collision")
 		{
-			//Reset the search
-			collisionData = 0;
+			//"increment the index
+			collisionData++;
+			if (collisionData >= world.tileSize())
+			{
+				//Reset the search
+				collisionData = 0;
+			}
 		}
-		//world.tileHit = true;
+		else if (data == "AI")
+		{
+			//"increment the index
+			enemyData++;
+
+			if (enemyData >= world.MAX_ENEMIES)
+			{
+				enemyData = 0;
+			}
+		}
 		//Unlock
 		SDL_SemPost(gDataLock);
+
+		if (data == "Collision")
+		{
+			//Check the collision
+			if (world.tileSize() >= 0)
+			{
+				world.checkCollision(collisionData);
+			}
+		}
+		else if (data == "AI")
+		{
+			if (world.enemySize() >= 0)
+			{
+				world.enemyPath(enemyData);
+			}
+		}
 	}
 
 	printf("%s finished!\n\n", data);
@@ -116,44 +134,3 @@ int collisionWorker(void* data)
 	return 0;
 }
 
-
-int aiWorker(void* data)
-{
-
-	printf("%s starting...\n", data);
-
-	srand(SDL_GetTicks());
-
-	bool run4ever = true;
-
-	while (run4ever)
-	{
-		//Check the collision
-		//Lock
-		SDL_SemWait(gDataLock);
-
-		//"increment the index
-		enemyData++;
-
-		if (enemyData >= world.MAX_ENEMIES)
-		{
-			world.generateEnemiesPath = false;
-		}
-
-		//Unlock
-		SDL_SemPost(gDataLock);
-
-		if (world.tileSize() >= 0)
-		{
-			world.checkCollision(collisionData);
-		}
-		if (world.enemySize() >= 0)
-		{
-			//std::cout << "generateEnemies" << std::endl;
-		}
-	}
-
-	printf("%s finished!\n\n", data);
-
-	return 0;
-}

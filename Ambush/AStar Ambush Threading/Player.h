@@ -21,5 +21,5 @@ private:
 	void friction();
 	int m_speed;
 	SDL_Point m_velocity;
-	int MAX_XVEL = 3, MAX_YVEL = 3;
+	int MAX_XVEL = 2, MAX_YVEL = 2;
 };

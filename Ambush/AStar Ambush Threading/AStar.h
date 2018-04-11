@@ -3,6 +3,7 @@
 #include "NodeGrid.h"
 #include "NodeCostComparer.h"
 #include <queue>
+#include <string>
 
 class AStar 
 {

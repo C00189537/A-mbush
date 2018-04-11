@@ -18,13 +18,11 @@ public:
 	void checkCollision(int i);
 	int tileSize();
 	int enemySize();
-	bool tileHit = false;
-
+	void enemyPath(int i);
 	
 	Spawner* enemyPool;
-	
-	bool generateEnemiesPath = true;
-	const int MAX_ENEMIES = 50;
+
+	const int MAX_ENEMIES = 5;
 private:
 
 	Player m_player;
@@ -39,8 +37,8 @@ private:
 
 	void aWholeNewWorld();
 
-	int m_gWidth = 100, m_gHeigth = 100;
-	int m_screenWidth = 1920,m_screenHeight = 1080;
+	int m_gWidth = 30, m_gHeigth = 30;
+	int m_screenWidth = 1000,m_screenHeight = 1000;
 	SDL_Point m_wallsize;
 
 	std::vector<SDL_Point> nodePos;
@@ -51,4 +49,6 @@ private:
 	void createPlayer(Keys* k);
 
 	AStar* m_astar;
+	Node* proximityNode(SDL_Point p);
+
 };
