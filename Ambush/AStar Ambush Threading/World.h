@@ -24,7 +24,7 @@ public:
 	
 	Spawner* enemyPool;
 
-	const int MAX_ENEMIES = 5;
+	const int MAX_ENEMIES = 500;
 private:
 
 	Player m_player;
@@ -39,7 +39,7 @@ private:
 
 	void aWholeNewWorld();
 
-	int m_gWidth = 30, m_gHeigth = 30;
+	int m_gWidth = 100, m_gHeigth = 100;
 	int m_screenWidth = 1000,m_screenHeight = 1000;
 	SDL_Point m_wallsize;
 

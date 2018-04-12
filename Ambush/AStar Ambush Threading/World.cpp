@@ -11,7 +11,7 @@ void World::create(Keys *k)
 	m_wallsize = { (m_screenWidth / m_gWidth), (m_screenHeight / m_gHeigth) };
 	enemyPool = new	EnemyType();
 	aWholeNewWorld();
-	m_nodes.setColumnSize(30);
+	m_nodes.setColumnSize(100);
 	m_nodes.addArcs();
 	
 	m_playerSpawn = { (m_screenWidth / 100) * 20, (m_screenHeight / 100) * 10, (m_screenWidth / 100) * 20, (m_screenHeight / 100) * 30};
@@ -45,7 +45,7 @@ void World::draw(SDL_Renderer *r)
 	{	
 		SDL_RenderDrawPoints(renderer, &nodePos.at(i), 1);
 	}*/
-	m_nodes.draw(r);
+	//m_nodes.draw(r);
 	for (int i = 0; i < m_enemies.size(); i++)
 	{
 		m_enemies.at(i)->draw(r);
@@ -238,7 +238,7 @@ int World::proximityNode(SDL_Point p)
 }
 void World::enemyPath(int i)
 {
-	m_astar->calculatePath(m_nodes.getNodes().at(proximityNode(m_enemies.at(i)->getPos())), m_nodes.getNodes().at(proximityNode(m_player.getPos())), m_enemies.at(i)->nodePath);
+	//m_astar->calculatePath(m_nodes.getNodes().at(proximityNode(m_enemies.at(i)->getPos())), m_nodes.getNodes().at(proximityNode(m_player.getPos())), m_enemies.at(i)->nodePath);
 	//std::cout << "Path made" << std::endl;
 }
 int distance(SDL_Point p1, SDL_Point p2)

@@ -23,8 +23,8 @@ int main(int argc, char* argv[])
 
 	bool running = true;
 
-	const float FPS = 60;
-	const float timePerFrame = 1.0f / FPS;
+	const float fps = 60;
+	const float timePerFrame = 1.0f / fps;
 	float currentTime = 0;
 	float lastTime = 0;
 	float deltaTime = 0;
@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
 	SDL_Thread* threadE = SDL_CreateThread(workerAI, "Collision", (void*)"Collision");
 	SDL_Thread* threadF = SDL_CreateThread(worker, "Collision", (void*)"Collision");
 	SDL_Thread* threadG = SDL_CreateThread(worker, "Collision", (void*)"Collision");
-	SDL_Thread* threadH = SDL_CreateThread(worker, "AI", (void*)"AI");
+	//SDL_Thread* threadH = SDL_CreateThread(worker, "AI", (void*)"AI");
 
 
 	while (running) 
@@ -75,7 +75,7 @@ int main(int argc, char* argv[])
 	SDL_WaitThread(threadE, NULL);
 	SDL_WaitThread(threadF, NULL);
 	SDL_WaitThread(threadG, NULL);
-	SDL_WaitThread(threadH, NULL);
+	//SDL_WaitThread(threadH, NULL);
 
 	return 0;
 }
