@@ -215,13 +215,13 @@ void World::createPlayer(Keys* k)
 	
 
 }
-Node* World::proximityNode(SDL_Point p)
+int World::proximityNode(SDL_Point p)
 {
 	SDL_Point result = {0, 0};
 	float smallest = 100000;
-	
+	int tempInt = 0;
 
-	Node* tempNode = new Node();
+	
 	for (int i = 0; i < m_nodes.getNodesSize(); i++)
 	{
 		if (m_nodes.getNodes().at(i)->getID() == "Floor")
@@ -230,15 +230,15 @@ Node* World::proximityNode(SDL_Point p)
 			if (temp < smallest)
 			{
 				smallest = temp;
-				tempNode = m_nodes.getNodes().at(i);
+				tempInt = i;
 			}
 		}
 	}
-	return tempNode;
+	return tempInt;
 }
 void World::enemyPath(int i)
 {
-	m_astar->calculatePath(proximityNode(m_enemies.at(i)->getPos()), proximityNode(m_player.getPos()), m_enemies.at(i)->nodePath);
+	m_astar->calculatePath(m_nodes.getNodes().at(proximityNode(m_enemies.at(i)->getPos())), m_nodes.getNodes().at(proximityNode(m_player.getPos())), m_enemies.at(i)->nodePath);
 	//std::cout << "Path made" << std::endl;
 }
 int distance(SDL_Point p1, SDL_Point p2)

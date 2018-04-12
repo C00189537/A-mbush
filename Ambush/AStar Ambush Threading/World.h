@@ -51,6 +51,6 @@ private:
 	void createPlayer(Keys* k);
 
 	AStar* m_astar;
-	Node* proximityNode(SDL_Point p);
+	int proximityNode(SDL_Point p);
 
 };

@@ -39,10 +39,10 @@ int main(int argc, char* argv[])
 	SDL_Thread* threadB = SDL_CreateThread(worker, "Collision", (void*)"Collision");
 	SDL_Thread* threadC = SDL_CreateThread(worker, "Collision", (void*)"Collision");
 
-	SDL_Thread* threadD = SDL_CreateThread(workerAI, "AI", (void*)"AI");
-	SDL_Thread* threadE = SDL_CreateThread(workerAI, "AI", (void*)"AI");
-	SDL_Thread* threadF = SDL_CreateThread(worker, "AI", (void*)"AI");
-	SDL_Thread* threadG = SDL_CreateThread(worker, "AI", (void*)"AI");
+	SDL_Thread* threadD = SDL_CreateThread(workerAI, "Collision", (void*)"Collision");
+	SDL_Thread* threadE = SDL_CreateThread(workerAI, "Collision", (void*)"Collision");
+	SDL_Thread* threadF = SDL_CreateThread(worker, "Collision", (void*)"Collision");
+	SDL_Thread* threadG = SDL_CreateThread(worker, "Collision", (void*)"Collision");
 	SDL_Thread* threadH = SDL_CreateThread(worker, "AI", (void*)"AI");
 
 
