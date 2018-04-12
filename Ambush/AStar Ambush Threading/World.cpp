@@ -40,10 +40,10 @@ void World::draw(SDL_Renderer *r)
 	SDL_RenderFillRect(r, &m_playerSpawn);
 	SDL_RenderFillRect(r, &m_enemySpawn);
 
-	SDL_SetRenderDrawColor(r, 255, 0, 255, 255);
-	/*for (int i = 0; i < nodePos.size(); i++)
+	/*SDL_SetRenderDrawColor(r, 255, 0, 255, 255);
+	for (int i = 0; i < nodePos.size(); i++)
 	{	
-		SDL_RenderDrawPoints(renderer, &nodePos.at(i), 1);
+		SDL_RenderDrawPoints(r, &nodePos.at(i), 1);
 	}*/
 	//m_nodes.draw(r);
 	for (int i = 0; i < m_enemies.size(); i++)
